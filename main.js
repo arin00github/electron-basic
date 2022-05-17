@@ -124,7 +124,7 @@ ipcMain.handle('dark-mode:system', () => {
 
 
 ipcMain.on('toMain', (evt, payload) => {
-  console.log('2. take payload in main.js', payload)
+  //console.log('2. take payload in main.js', payload)
   win.webContents.send("fromMain", payload);
 
 })
