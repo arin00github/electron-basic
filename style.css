@@ -1,5 +1,9 @@
 
 
+.content{
+  margin-top: 40px;
+}
+
 @media (prefers-color-scheme: dark) {
     body { background: #333; color: white; }
   }
