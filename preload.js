@@ -38,3 +38,19 @@ contextBridge.exposeInMainWorld('api',{
     }
   }
 })
+
+contextBridge.exposeInMainWorld('nexonapi',{
+  pay: (channel, data) => {
+    let validChannels = ['payMoney'];
+    if(validChannels.includes(channel)){
+     
+      ipcRenderer.send(channel, data)
+    }
+  },
+  save: (channel, func) => {
+    let validChannels = ['savePoint']
+    if(validChannels.includes(channel)){
+      ipcRenderer.on(channel, (evt, data) => func(evt, data))
+    }
+  }
+})

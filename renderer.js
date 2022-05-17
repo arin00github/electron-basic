@@ -24,16 +24,21 @@
 // }
 
 
-document.getElementById('btn').addEventListener('click', async() => {
-  const inputValue = document.getElementById('text-input').value;
-  console.log('1. click & sent to main.js')
-   await window.api.send('toMain', inputValue);
-})
+// document.getElementById('btn').addEventListener('click', async() => {
+//   const inputValue = document.getElementById('text-input').value;
+//   console.log('1. click & sent to main.js')
+//    await window.api.send('toMain', inputValue);
+// })
 
 
-window.api.receive('fromMain', (evt, payload) => {
-  console.log('3. receive data from ipcMain', payload)
-  document.getElementById('text-box').textContent = payload
+// window.api.receive('fromMain', (evt, payload) => {
+//   console.log('3. receive data from ipcMain', payload)
+//   document.getElementById('text-box').textContent = payload
+// })
+
+window.nexonapi.save('savePoint', (evt, payload) => {
+  console.log('3. 포인트 받기', payload)
+  document.getElementById('pay-result').textContent = payload;
 })
 
 document.getElementById('toggle-dark-mode').addEventListener('click', async() => {
