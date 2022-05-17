@@ -71,12 +71,6 @@ function createWindow () {
     title: 'nexon포인트 결제'
   })
 
-
-  // const view = new BrowserView()
-  // win.setBrowserView(view)
-  // view.setBounds({ x: 0, y: 0, width: 300, height: 300 })
-  // view.webContents.loadURL('https://electronjs.org')
-
   win.loadFile('index.html');
   win2.loadFile('index2.html');
 
@@ -102,11 +96,6 @@ app.whenReady().then(() => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
   })
 
-  
-  
-
-  
-
 })
 
 ipcMain.handle('dark-mode:toggle', () => {
@@ -122,12 +111,6 @@ ipcMain.handle('dark-mode:system', () => {
   nativeTheme.themeSource = 'system'
 })
 
-
-ipcMain.on('toMain', (evt, payload) => {
-  //console.log('2. take payload in main.js', payload)
-  win.webContents.send("fromMain", payload);
-
-})
 
 ipcMain.on('payMoney', (evt, payload) => {
   console.log('2.nexon take money', payload)
