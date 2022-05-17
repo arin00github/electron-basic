@@ -1,5 +1,17 @@
 
 
+
+.aside {
+  display: fix;
+  top: 0;
+  left: 0;
+  width: 200px;
+}
+
+.aside .profile {
+  padding: 10px;
+}
+
 @media (prefers-color-scheme: dark) {
     body { background: #333; color: white; }
   }

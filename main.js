@@ -49,39 +49,17 @@ function createWindow () {
       nodeIntegration: true,
       contextIsolation : true
     },
-   // autoHideMenuBar: true,
-   // frame: false,
     center: true,
     title: '어플리케이션01'
   })
 
-  //const menu = new Menu()
-  //const customMenu = Menu.buildFromTemplate(template)
-  //Menu.setApplicationMenu(customMenu)
-
-  //결제창
-  win2 = new BrowserWindow({
-    width: 400,
-    height: 400,
-    webPreferences: {
-      preload: path.join(__dirname, 'preload.js'),
-      nodeIntegration: true,
-      contextIsolation : true
-    },
-    title: 'nexon포인트 결제'
-  })
-
-
-  // const view = new BrowserView()
-  // win.setBrowserView(view)
-  // view.setBounds({ x: 0, y: 0, width: 300, height: 300 })
-  // view.webContents.loadURL('https://electronjs.org')
+  const view = new BrowserView()
+  win.setBrowserView(view)
+  view.setBounds({ x: 200, y: 0, width: 600, height: 600 })
+  view.setAutoResize({width: true, height: true})
+  view.webContents.loadURL('https://electronjs.org')
 
   win.loadFile('index.html');
-  win2.loadFile('index2.html');
-
-  win.webContents.openDevTools();
-  win2.webContents.openDevTools();
 
    // 웹 페이지 로드 완료
    win.webContents.on('did-finish-load', (evt) => {
@@ -101,11 +79,6 @@ app.whenReady().then(() => {
   app.on('activate', function () {
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
   })
-
-  
-  
-
-  
 
 })
 
@@ -128,16 +101,6 @@ ipcMain.on('toMain', (evt, payload) => {
   win.webContents.send("fromMain", payload);
 
 })
-
-ipcMain.on('payMoney', (evt, payload) => {
-  console.log('2.nexon take money', payload)
-  win.webContents.send("savePoint", payload);
-  win2.webContents.send("savePoint", payload);
-
-})
-
-
-
    
 app.on('window-all-closed', function () {
     win = null
