@@ -1,17 +1,19 @@
 
+const btnEl = document.getElementById('btn')
 
-window.nexonapi.save('savePoint', (evt, payload) => {
-  console.log('3. 포인트 받기', payload)
-  document.getElementById('pay-result').textContent = payload;
+
+btnEl.addEventListener('click', (evt) => {
+  const inputValue = document.getElementById('text-input').value
+  // onInputValue 이벤트 송신
+  window.api.send('onInputValue', inputValue);
 })
 
 
-document.getElementById('toggle-dark-mode').addEventListener('click', async() => {
-  const isDarkMode = await window.darkMode.toggle();
-  document.getElementById('theme-source').innerHTML = isDarkMode ? "Dark" :'Light'
+window.api.receive('replyInputValue',(evt, data)=> {
+  document.getElementById('text-box').textContent = data
 })
 
-document.getElementById('reset-to-system').addEventListener('click', async() => {
-  await window.darkMode.system();
-  document.getElementById('theme-source').innerHTML = 'System'
+
+window.api.receive('onWebcontentsValue',(evt, data)=> {
+  document.getElementById('text-box').textContent = data
 })
