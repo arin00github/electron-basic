@@ -10,34 +10,7 @@ app.disableHardwareAcceleration();
 
 let win = null
 
-const template = [
-  {
-    label: 'File',
-    submenu : [
-      {role: 'close'},
-    ]
-  },
-  {
-    label: 'Edit',
-    submenu: [
-      {role:'undo'},
-      {role: 'redo'},
-      {type: 'seperator'},
-      {role: 'cut'},
-      {role:'copy'}
-    ]
-  },
-  {label:'window',
-submenu: [
-{
-  label: 'Lear more',
-  click: async() => {
-    const {shell} = requre('electron');
-    await shell.openExternal('http://electronjs.org')
-  }
-}
-]}
-]
+
 
 
 function createWindow () {
@@ -58,6 +31,7 @@ function createWindow () {
   view.setBounds({ x: 200, y: 0, width: 600, height: 600 })
   view.setAutoResize({width: true, height: true})
   view.webContents.loadURL('https://electronjs.org')
+
 
   win.loadFile('index.html');
 
@@ -93,13 +67,6 @@ ipcMain.handle('dark-mode:toggle', () => {
 
 ipcMain.handle('dark-mode:system', () => {
   nativeTheme.themeSource = 'system'
-})
-
-
-ipcMain.on('toMain', (evt, payload) => {
-  //console.log('2. take payload in main.js', payload)
-  win.webContents.send("fromMain", payload);
-
 })
    
 app.on('window-all-closed', function () {
