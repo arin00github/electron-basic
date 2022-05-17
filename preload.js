@@ -1,56 +1,15 @@
 const { contextBridge, ipcRenderer } = require('electron')
 
 
-// window.addEventListener('DOMContentLoaded', () => {
-//   const replaceText = (selector, text) => {
-//     const element = document.getElementById(selector)
-//     if (element) element.innerText = text
-//   }
-
-//   for (const dependency of ['chrome', 'node', 'electron']) {
-//     replaceText(`${dependency}-version`, process.versions[dependency])
-//   }
-
-  
-// })
-
-
-contextBridge.exposeInMainWorld('darkMode', {
-  
-  toggle: () => ipcRenderer.invoke('dark-mode:toggle'),
-  system: ()=> ipcRenderer.invoke('dark-mode:system'),
-  
-})
-
-
-contextBridge.exposeInMainWorld('api',{
-  send: (channel, data) => {
-    let validChannels = ['toMain'];
-    if(validChannels.includes(channel)){
-      console.log('ipcRenderer send api')
-      ipcRenderer.send(channel, data)
-    }
-  },
-  receive: (channel, func) => {
-    let validChannels = ['fromMain']
-    if(validChannels.includes(channel)){
-      ipcRenderer.on(channel, (evt, data) => func(evt, data))
-    }
+window.addEventListener('DOMContentLoaded', () => {
+  const replaceText = (selector, text) => {
+    const element = document.getElementById(selector)
+    if (element) element.innerText = text
   }
-})
 
-contextBridge.exposeInMainWorld('nexonapi',{
-  pay: (channel, data) => {
-    let validChannels = ['payMoney'];
-    if(validChannels.includes(channel)){
-     
-      ipcRenderer.send(channel, data)
-    }
-  },
-  save: (channel, func) => {
-    let validChannels = ['savePoint']
-    if(validChannels.includes(channel)){
-      ipcRenderer.on(channel, (evt, data) => func(evt, data))
-    }
+  for (const dependency of ['chrome', 'node', 'electron']) {
+    replaceText(`${dependency}-version`, process.versions[dependency])
   }
+
+  
 })
